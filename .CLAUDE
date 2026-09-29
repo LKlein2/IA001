@@ -1,0 +1,70 @@
+IA001 - Análise e Visualização de Dados com Python e Ferramentas Assistidas por IA
+
+## Primeira tarefa (Já foi entregue)
+atividade01_proposta_analise_visual.ipynb
+
+## Segunda tarefa 
+atividade02_dashboard_streamlit.ipynb
+
+Os dados são os gastos em cota parlamentar no ano de 2025, disponibilizado pela camara de deputados do brasil.
+
+Se precisar consultar, use os dados de sample (C:\UFRGS\IA001\Samples\) como referencia, é um arquivo csv mais enxuto com menos linhas.
+
+O dataset real está em C:\UFRGS\IA001\Real\
+
+Sobre os dados do dataset real:
+
+Número de Registros: 209078
+Número de Atributos: 32
+
+Tipos de dados:
+txNomeParlamentar                       str
+cpf                                 float64
+ideCadastro                         float64
+nuCarteiraParlamentar               float64
+nuLegislatura                         int64
+sgUF                                    str
+sgPartido                               str
+codLegislatura                        int64
+numSubCota                            int64
+txtDescricao                            str
+numEspecificacaoSubCota               int64
+txtDescricaoEspecificacao               str
+txtFornecedor                           str
+txtCNPJCPF                              str
+txtNumero                               str
+indTipoDocumento                      int64
+datEmissao                   datetime64[us]
+vlrDocumento                        float64
+vlrGlosa                            float64
+vlrLiquido                          float64
+numMes                                int64
+numAno                                int64
+numParcela                            int64
+txtPassageiro                           str
+txtTrecho                               str
+numLote                             float64
+numRessarcimento                    float64
+datPagamentoRestituicao                 str
+vlrRestituicao                      float64
+nuDeputadoId                          int64
+ideDocumento                          int64
+urlDocumento                            str
+dtype: object
+
+Como fonte, use:
+
+# Aula 1 — Estatística, Análise Exploratória e Visualização de Dados
+Apresentou a Estatística como ferramenta para compreender a variabilidade e avaliar evidências, destacando a importância do conhecimento do domínio na análise exploratória. Foram abordadas as etapas da exploração de dados, o Quarteto de Anscombe e o papel da visualização na identificação de padrões e formulação de perguntas. Também foram discutidas aplicações da IA na compreensão de datasets, geração de objetivos, criação de visualizações e produção de infográficos.
+
+Anotações disponíveis em C:\UFRGS\IA001\aula1.md
+
+# Aula 2 — Fundamentos da Visualização de Dados
+Aborda a visualização de dados como um instrumento de comunicação clara e precisa, cobrindo o mapeamento de variáveis em propriedades visuais (aesthetics e escalas), a escolha adequada de gráficos segundo o objetivo analítico e a relevância da percepção visual e das cores. Também são exploradas técnicas para tratar distribuições, séries temporais e sobreposição de dados, destacando boas práticas de design que evitam distorções e facilitam a interpretação e tomada de decisão.
+
+Anotações disponíveis em C:\UFRGS\IA001\aula2.md
+
+## Aula 3 — Bibliotecas para Visualização de Dados e Dashboards
+Aborda bibliotecas de vizualização ensinadas e estimuladas a serem usadas na disciplina e alternativas sem código.
+
+Anotações disponíveis em C:\UFRGS\IA001\aula3.md
