@@ -37,11 +37,13 @@ OPCOES_TOP_N = [10, 20, 30, 40, 50]
 FILTRO_METRICA = "Métrica da matriz mensal"
 AJUDA_METRICA = (
     "Variação = gasto do partido no mês comparado à média mensal do próprio partido no período. "
-    "Média = gasto do partido no mês ÷ parlamentares do partido com despesa no mês."
+    "Média = gasto do partido no mês ÷ parlamentares do partido com despesa no mês. "
+    "% da cota = gasto do partido no mês ÷ soma das cotas mensais (por UF) dos seus parlamentares com despesa no mês."
 )
 METRICA_VARIACAO = "Variação vs. média mensal do partido"
 METRICA_TOTAL = "Total gasto"
 METRICA_MEDIA = "Média por parlamentar"
+METRICA_COTA = "% da cota usada"
 TEXTO_FONTE = (
     "Fonte: Câmara dos Deputados - Cota para o Exercício da Atividade Parlamentar (CEAP), 2025. "
     "Excluídos lançamentos de lideranças, sem partido e valores negativos (estornos)."
@@ -68,17 +70,17 @@ ROTULO_MES = "Mês"
 ROTULO_GASTO_TOTAL = "Gasto total"
 ROTULO_PARLAMENTARES = "Parlamentares com despesa"
 ROTULO_MEDIA = "Média por parlamentar"
+ROTULO_PCT_COTA = "% da cota usada"
 OUTRAS = "Outras categorias"
-LEGENDA_MEDIA_SELECIONADOS = "Média de gasto de todos os parlamentares após filtro: {valor}"
-LEGENDA_MEDIA_TODOS = "Média de gasto total de todos os parlamentares: {valor}"
+# Rótulo no fim das barras de G2 e G3: valor comparado às médias do recorte e geral
+ROTULO_VALOR_VS_MEDIAS = "{valor} ({vs_recorte} recorte · {vs_geral} geral)"
+ROTULO_VALOR_VS_MEDIA_GERAL = "{valor} ({vs_geral})"
+LEGENDA_MEDIA_SELECIONADOS = "Média de gasto do recorte: {valor}"
+LEGENDA_MEDIA_TODOS = "Média de gasto do conjunto: {valor}"
 CHECK_MEDIA_TODOS = "Exibir média de gasto total"
 AJUDA_MEDIA_TODOS = "Linha pontilhada com a média de todos os parlamentares da base, ignorando os filtros."
 CHECK_MEDIA_FILTRO = "Exibir média de gasto após filtro"
 AJUDA_MEDIA_FILTRO = "Linha tracejada com a média dos gastos dos parlamentares que atendem aos filtros."
-AVISO_MEDIAS_IGUAIS = (
-    "Com todos os parlamentares selecionados, as duas médias coincidem e as linhas se sobrepõem. "
-    "Aplique um filtro para compará-las."
-)
 
 # G1 - Gasto por partido e categoria
 TITULO_G1 = "Quanto cada partido gastou - e em quê"
@@ -93,7 +95,10 @@ LEITURA_G1_CATEGORIA = "Entre as categorias destacadas, **{categoria}** é a que
 TITULO_G2 = "Quanto gasta, em média, cada parlamentar de cada partido"
 EIXO_X_G2 = "Média por parlamentar (R$)"
 EIXO_Y_G2 = "Partido (nº de parlamentares com despesa)"
-LEITURA_G2 = "a média geral é de **{valor}** por parlamentar"
+HOVER_G2_PARTE = "da média do partido"
+ROTULO_VS_RECORTE = "vs. média do recorte"
+ROTULO_VS_GERAL = "vs. média geral"
+LEITURA_G2 = "a média do recorte é de **{valor}** por parlamentar"
 LEITURA_G2_COMPARACAO = (
     ". **{maior}** tem a maior média ({valor_maior}) "
     "e **{menor}** a menor ({valor_menor}), uma diferença de {diferenca}."
@@ -102,9 +107,13 @@ LEITURA_G2_COMPARACAO = (
 # G3 - Parlamentares que mais gastaram
 TITULO_G3 = "Os {n} parlamentares que mais gastaram - e em quê"
 HOVER_G3_PARTE = "do parlamentar"
-ROTULO_G3_VALOR = "{valor} ({percentual} {sentido} da média geral)"
-ROTULO_G3_ACIMA = "acima"
-ROTULO_G3_ABAIXO = "abaixo"
+LEGENDA_COTA_G3 = "Cota do parlamentar no período"
+ROTULO_COTA_PERIODO = "Cota no período"
+ROTULO_MESES_ATIVOS = "Meses com despesa"
+NOTA_G3_COTA = (
+    "O fundo cinza de cada barra é a cota do parlamentar no período: cota mensal da UF dele "
+    "× meses em que teve despesa. O saldo não usado acumula ao longo do ano."
+)
 LEITURA_G3 = (
     "**{parlamentar}** lidera o ranking com {valor} "
     "({percentual} acima da média do recorte); "
@@ -112,6 +121,15 @@ LEITURA_G3 = (
     "Entre os {n} maiores gastos, o partido mais frequente é "
     "**{partido}** ({n_partido} parlamentares). "
 )
+TITULO_RESUMO_G3 = "Resumo do ranking: quantos são de cada partido e estado"
+ABA_RESUMO_PARTIDO = "Por partido"
+ABA_RESUMO_UF = "Por estado"
+ABA_RESUMO_PARTIDO_UF = "Partido + estado"
+ROTULO_UF = "Estado (UF)"
+ROTULO_PARTIDO_UF = "Partido-UF"
+COLUNA_RESUMO_QTD = "Parlamentares no ranking"
+COLUNA_RESUMO_PCT = "% do ranking"
+COLUNA_RESUMO_GASTO = "Gasto somado"
 
 # G4 - Matriz partido × mês
 TITULO_G4 = "Gasto mês a mês por partido - {metrica}"
@@ -128,6 +146,13 @@ NOTA_G4_VARIACAO = (
     "Quadrados vazios indicam meses fora do período selecionado ou sem despesas registradas. "
     "O mês é o de competência da despesa (numMes)."
 )
+LEGENDA_COR_G4_COTA = "% da cota mensal usada"
+NOTA_G4_COTA = (
+    "Cada quadrado compara o gasto do partido no mês com a soma das cotas mensais (que variam por UF) "
+    "dos seus parlamentares com despesa no mês: azul = abaixo do teto, vermelho = acima. "
+    "Passar de 100% é possível porque o saldo não usado da cota acumula ao longo do ano. "
+    "Quadrados vazios indicam meses fora do período selecionado ou sem despesas registradas."
+)
 NOTA_G4 = (
     "Cada quadrado é um partido em um mês; quanto mais escuro, maior o valor. "
     "Quadrados vazios indicam meses fora do período selecionado ou sem despesas registradas. "
@@ -142,6 +167,8 @@ MESES = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "
 
 # Caminho do CSV relativo a este arquivo: IA001/Real/Ano-2025.csv
 CAMINHO_DADOS = Path(__file__).resolve().parent.parent / "Real" / "Ano-2025.csv"
+# Teto mensal da CEAP por UF (sem cabeçalho: "UF;valor")
+CAMINHO_COTA = Path(__file__).resolve().parent.parent / "Real" / "valor-cota.csv"
 
 # Somente as colunas usadas no dashboard (reduz memória e tempo de leitura)
 COLUNAS = [
@@ -161,10 +188,14 @@ COR_OUTRAS = "#a3a29c"
 # Linhas de referência: média dos selecionados (cinza) e de todos (violeta)
 COR_MEDIA_SELECIONADOS = "#52514e"
 COR_MEDIA_TODOS = "#4a3aa7"
+# Cota de cada parlamentar no G3: fundo translúcido e marca no fim
+COR_COTA_FUNDO = "#a3a29c"
+OPACIDADE_COTA_FUNDO = 0.3
+COR_COTA_MARCA = "#7a7974"
 # Rampa sequencial (azul, claro -> escuro) para a matriz mensal
-RAMPA_AZUL = ["#cde2fb", "#86b6ef", "#3987e5", "#1c5cab", "#0d366b"]
+RAMPA_AZUL = ["#FFFFFF", "#C9B6B8", "#B68187", "#B95B66", "#B2182B"]
 # Escala divergente para a variação (-100% a +100%)
-DIVERGENTE = ["#2166AC", "#F7F7F7", "#B2182B"]
+DIVERGENTE = ["#FFFFFF", "#EB8F8F", "#B2182B"]
 # Limite da escala de variação (%); valores além disso ficam com a cor máxima
 LIMITE_VARIACAO = 100
 N_CATEGORIAS_DESTAQUE = 5
@@ -212,11 +243,14 @@ def hover_categoria(parte):
         f"(%{{customdata[2]:.1f}}% {parte})<extra></extra>"
     )
 
-def adicionar_linhas_media(fig, media_selecionados, media_todos, exibir_selecionados, exibir_todos):
+def adicionar_linhas_media(fig, media_selecionados, media_todos, exibir_selecionados, exibir_todos, sem_filtro):
     # Até duas referências verticais, conforme os checkboxes da barra lateral:
     # média do recorte filtrado (tracejada) e média de todos os parlamentares
     # da base (pontilhada). Os valores vão para a legenda para não ficarem
-    # sobre as barras.
+    # sobre as barras. Sem filtro as duas médias coincidem: fica só a geral.
+    if sem_filtro:
+        exibir_todos = exibir_todos or exibir_selecionados
+        exibir_selecionados = False
     linhas = []
     if exibir_selecionados:
         linhas.append((media_selecionados, "dash", COR_MEDIA_SELECIONADOS,
@@ -236,10 +270,34 @@ def adicionar_linhas_media(fig, media_selecionados, media_todos, exibir_selecion
             )
         )
 
-def aviso_medias_iguais(media_selecionados, media_todos, exibir_selecionados, exibir_todos):
-    # Só faz sentido avisar quando as duas linhas estão visíveis
-    if exibir_selecionados and exibir_todos and abs(media_selecionados - media_todos) < 1:
-        st.caption(AVISO_MEDIAS_IGUAIS)
+def resumo_ranking(parlamentares, chave, rotulo):
+    # Conta quantos parlamentares do ranking caem em cada grupo (partido, UF...);
+    # "chave" é uma Series alinhada a "parlamentares" com o grupo de cada um
+    resumo = (
+        parlamentares.groupby(chave.rename(rotulo))["total"]
+        .agg(qtd="size", gasto="sum")
+        .sort_values(["qtd", "gasto"], ascending=False)
+        .reset_index()
+    )
+    return pd.DataFrame({
+        rotulo: resumo[rotulo],
+        COLUNA_RESUMO_QTD: resumo["qtd"],
+        COLUNA_RESUMO_PCT: (resumo["qtd"] / len(parlamentares) * 100).map(formatar_percentual),
+        COLUNA_RESUMO_GASTO: resumo["gasto"].map(formatar_milhoes),
+    })
+
+def exibir_resumo(aba, tabela):
+    aba.dataframe(
+        tabela,
+        hide_index=True,
+        width="stretch",
+        height=min(400, 35 * len(tabela) + 38),
+        column_config={
+            COLUNA_RESUMO_QTD: st.column_config.ProgressColumn(
+                format="%d", min_value=0, max_value=int(tabela[COLUNA_RESUMO_QTD].max())
+            )
+        },
+    )
 
 @st.cache_data
 def carregar_dados(caminho=CAMINHO_DADOS):
@@ -259,12 +317,22 @@ def carregar_dados(caminho=CAMINHO_DADOS):
 
     return df.reset_index(drop=True)
 
+@st.cache_data
+def carregar_cota(caminho=CAMINHO_COTA):
+    # Series UF -> valor máximo mensal da cota (R$)
+    cota = pd.read_csv(
+        caminho, sep=";", header=None, names=["sgUF", "cota"],
+        decimal=",", thousands=".", encoding="utf-8-sig",
+    )
+    return cota.set_index("sgUF")["cota"]
+
 # ---------------------------------------------------------------------------
 # Página
 # ---------------------------------------------------------------------------
 st.set_page_config(page_title=TITULO_ABA, layout="wide")
 
 df = carregar_dados()
+cota_uf = carregar_cota()
 
 # ---------------------------------------------------------------------------
 # Sidebar - controles interativos
@@ -316,7 +384,7 @@ top_n = st.sidebar.radio(
 
 metrica_matriz = st.sidebar.radio(
     FILTRO_METRICA,
-    options=[METRICA_VARIACAO, METRICA_TOTAL, METRICA_MEDIA],
+    options=[METRICA_VARIACAO, METRICA_TOTAL, METRICA_MEDIA, METRICA_COTA],
     help=AJUDA_METRICA,
 )
 
@@ -325,16 +393,25 @@ exibir_media_filtro = st.sidebar.checkbox(CHECK_MEDIA_FILTRO, value=True, help=A
 
 st.sidebar.caption(TEXTO_FONTE)
 
-df_filtrado = df[
+filtro_sem_categoria = (
     df["sgPartido"].isin(partidos)
     & df["sgUF"].isin(ufs)
     & df["numMes"].between(mes_inicio, mes_fim)
-    & df["txtDescricao"].isin(categorias)
-]
+)
+df_filtrado = df[filtro_sem_categoria & df["txtDescricao"].isin(categorias)]
 
 if df_filtrado.empty:
     st.warning(AVISO_SEM_DADOS)
     st.stop()
+# Nenhum filtro restringe a base: média do recorte = média geral
+sem_filtro = len(df_filtrado) == len(df)
+
+# Cota disponível: um registro por parlamentar × mês com despesa, valendo a cota
+# mensal da UF dele. Ignora o filtro de categoria para o teto não encolher.
+ativos = df.loc[filtro_sem_categoria, ["nuDeputadoId", "sgPartido", "sgUF", "numMes"]].drop_duplicates(
+    subset=["nuDeputadoId", "numMes"]
+)
+ativos["cota"] = ativos["sgUF"].map(cota_uf)
 
 # Cores fixas por categoria: as 5 maiores do ano recebem uma cor própria e o
 # restante vira "Outras". A cor segue a categoria, não muda com os filtros.
@@ -446,42 +523,88 @@ media_partido = (
 media_partido["rotulo"] = media_partido["sgPartido"] + " (" + media_partido["parlamentares"].astype(str) + ")"
 media_partido["media_fmt"] = media_partido["media"].map(formatar_reais)
 media_partido["total_fmt"] = media_partido["total"].map(formatar_reais)
-media_geral = total_gasto / n_parlamentares
-
-fig_G2 = go.Figure(
-    go.Bar(
-        x=media_partido["media"],
-        y=media_partido["rotulo"],
-        orientation="h",
-        marker_color=PALETA[0],
-        showlegend=False,
-        text=media_partido["media"].map(formatar_milhoes),
-        textposition="outside",
-        cliponaxis=False,
-        customdata=media_partido[["sgPartido", "media_fmt", "parlamentares", "total_fmt"]],
-        hovertemplate=f"<b>%{{customdata[0]}}</b><br>{ROTULO_MEDIA}: %{{customdata[1]}}"
-        f"<br>{ROTULO_PARLAMENTARES}: %{{customdata[2]}}<br>{ROTULO_GASTO_TOTAL}: %{{customdata[3]}}<extra></extra>",
-    )
+media_partido["pct_cota"] = (
+    media_partido["total"] / media_partido["sgPartido"].map(ativos.groupby("sgPartido")["cota"].sum()) * 100
 )
+media_partido["pct_cota_fmt"] = media_partido["pct_cota"].map(formatar_percentual, na_action="ignore")
+media_geral = total_gasto / n_parlamentares
 # Média de todos os parlamentares da base, ignorando os filtros
 media_todos = df["vlrLiquido"].sum() / df["nuDeputadoId"].nunique()
-adicionar_linhas_media(fig_G2, media_geral, media_todos, exibir_media_filtro, exibir_media_todos)
+# Quanto a média de cada partido fica acima/abaixo da média do recorte e da média geral
+media_partido["vs_recorte_fmt"] = ((media_partido["media"] / media_geral - 1) * 100).map(formatar_variacao)
+media_partido["vs_geral_fmt"] = ((media_partido["media"] / media_todos - 1) * 100).map(formatar_variacao)
+
+
+def rotulo_vs_medias(valor):
+    # "R$ 120,3 mil (+12,0% recorte · +5,1% geral)"; sem filtro as duas
+    # comparações são iguais e fica só "R$ 120,3 mil (+5,1%)"
+    modelo = ROTULO_VALOR_VS_MEDIA_GERAL if sem_filtro else ROTULO_VALOR_VS_MEDIAS
+    return modelo.format(
+        valor=formatar_milhoes(valor),
+        vs_recorte=formatar_variacao((valor / media_geral - 1) * 100),
+        vs_geral=formatar_variacao((valor / media_todos - 1) * 100),
+    )
+
+
+media_partido["rotulo_valor"] = media_partido["media"].map(rotulo_vs_medias)
+
+# Média por parlamentar quebrada por categoria: gasto do partido na categoria
+# ÷ parlamentares do partido (as partes somam a média do partido)
+media_partido_cat = gasto_partido_cat.merge(
+    media_partido[["sgPartido", "rotulo", "parlamentares"]], on="sgPartido"
+)
+media_partido_cat["media_cat"] = media_partido_cat["vlrLiquido"] / media_partido_cat["parlamentares"]
+media_partido_cat["media_cat_fmt"] = media_partido_cat["media_cat"].map(formatar_reais)
+
+fig_G2 = px.bar(
+    media_partido_cat,
+    x="media_cat",
+    y="rotulo",
+    color="categoria_grafico",
+    orientation="h",
+    color_discrete_map=cor_categoria,
+    # Maior média no topo
+    category_orders={"rotulo": media_partido["rotulo"].tolist()[::-1], "categoria_grafico": ordem_categorias},
+    custom_data=["categoria_grafico", "media_cat_fmt", "percentual"],
+)
+fig_G2.update_traces(hovertemplate=hover_categoria(HOVER_G2_PARTE))
+# Rótulo com a média do partido no fim da barra; o tooltip dele traz o resumo do partido
+fig_G2.add_trace(
+    go.Scatter(
+        x=media_partido["media"],
+        y=media_partido["rotulo"],
+        mode="text",
+        text=media_partido["rotulo_valor"],
+        textposition="middle right",
+        showlegend=False,
+        customdata=media_partido[
+            ["sgPartido", "media_fmt", "parlamentares", "total_fmt", "pct_cota_fmt", "vs_recorte_fmt", "vs_geral_fmt"]
+        ],
+        hovertemplate=f"<b>%{{customdata[0]}}</b><br>{ROTULO_MEDIA}: %{{customdata[1]}}"
+        + ("" if sem_filtro else f"<br>{ROTULO_VS_RECORTE}: %{{customdata[5]}}")
+        + f"<br>{ROTULO_VS_GERAL}: %{{customdata[6]}}"
+        f"<br>{ROTULO_PARLAMENTARES}: %{{customdata[2]}}<br>{ROTULO_GASTO_TOTAL}: %{{customdata[3]}}"
+        f"<br>{ROTULO_PCT_COTA}: %{{customdata[4]}}<extra></extra>",
+    )
+)
+adicionar_linhas_media(fig_G2, media_geral, media_todos, exibir_media_filtro, exibir_media_todos, sem_filtro)
 fig_G2.update_layout(
+    barmode="stack",
     bargap=0.25,
     height=max(320, 28 * len(media_partido) + 140),
     margin=dict(l=10, r=10, t=40, b=10),
     xaxis=dict(
         title=EIXO_X_G2,
         tickformat=",.0f",
-        range=[0, max(media_partido["media"].max(), media_todos) * 1.18],
+        # Folga à direita para o rótulo com as duas comparações
+        range=[0, max(media_partido["media"].max(), media_todos) * 1.6],
     ),
     yaxis=dict(title=EIXO_Y_G2),
     separators=",.",
     showlegend=True,
-    legend=dict(orientation="h", yanchor="bottom", y=1.02, x=0),
+    legend=dict(orientation="h", yanchor="bottom", y=1.02, x=0, title_text=""),
 )
 st.plotly_chart(fig_G2, width="stretch")
-aviso_medias_iguais(media_geral, media_todos, exibir_media_filtro, exibir_media_todos)
 
 maior, menor = media_partido.iloc[-1], media_partido.iloc[0]
 texto_G2 = LEITURA_G2.format(valor=formatar_reais(media_geral))
@@ -512,9 +635,26 @@ parlamentares = (
 parlamentares["rotulo"] = (
     parlamentares["nome"] + " (" + parlamentares["partido"] + "-" + parlamentares["uf"] + ")"
 )
+# Cota de cada parlamentar no período: cota mensal da UF × meses com despesa
+cota_parlamentar = ativos.groupby("nuDeputadoId")["cota"].agg(cota="sum", meses="size")
+parlamentares = parlamentares.join(cota_parlamentar)
+parlamentares["pct_cota"] = parlamentares["total"] / parlamentares["cota"] * 100
 
 # O recorte pode ter menos parlamentares que o top N pedido
 st.subheader(TITULO_G3.format(n=len(parlamentares)))
+
+# Resumo do ranking: quantos dos N são de cada partido, estado e partido-UF
+with st.expander(TITULO_RESUMO_G3, expanded=False):
+    abas = st.tabs([ABA_RESUMO_PARTIDO, ABA_RESUMO_UF, ABA_RESUMO_PARTIDO_UF])
+    tabelas = [
+        resumo_ranking(parlamentares, parlamentares["partido"], ROTULO_PARTIDO),
+        resumo_ranking(parlamentares, parlamentares["uf"], ROTULO_UF),
+        resumo_ranking(
+            parlamentares, parlamentares["partido"] + "-" + parlamentares["uf"], ROTULO_PARTIDO_UF
+        ),
+    ]
+    for aba, tabela in zip(abas, tabelas):
+        exibir_resumo(aba, tabela)
 
 gasto_parl_cat = (
     df_filtrado[df_filtrado["nuDeputadoId"].isin(parlamentares.index)]
@@ -526,16 +666,6 @@ gasto_parl_cat["percentual"] = (
     gasto_parl_cat["vlrLiquido"] / gasto_parl_cat["nuDeputadoId"].map(parlamentares["total"]) * 100
 )
 gasto_parl_cat["valor_fmt"] = gasto_parl_cat["vlrLiquido"].map(formatar_reais)
-
-
-def rotulo_vs_media(valor):
-    # "R$ 674,5 mil (51,9% acima da média geral)"
-    diferenca = (valor / media_geral - 1) * 100
-    return ROTULO_G3_VALOR.format(
-        valor=formatar_milhoes(valor),
-        percentual=formatar_percentual(abs(diferenca)),
-        sentido=ROTULO_G3_ACIMA if diferenca >= 0 else ROTULO_G3_ABAIXO,
-    )
 
 
 fig_G3 = px.bar(
@@ -550,12 +680,43 @@ fig_G3 = px.bar(
     labels={"vlrLiquido": EIXO_VALOR_TOTAL, "rotulo": ROTULO_PARLAMENTAR, "categoria_grafico": ROTULO_CATEGORIA},
 )
 fig_G3.update_traces(hovertemplate=hover_categoria(HOVER_G3_PARTE))
+
+# Fundo de cada barra com a cota do parlamentar. Retângulos no eixo categórico
+# usam a posição numérica da categoria (índice na ordem que o px definiu).
+ordem_y = list(fig_G3.layout.yaxis.categoryarray or parlamentares["rotulo"])
+meia_barra = (1 - 0.25) / 2  # bargap 0.25
+for rotulo, cota in zip(parlamentares["rotulo"], parlamentares["cota"]):
+    if pd.isna(cota):
+        continue
+    i = ordem_y.index(rotulo)
+    fig_G3.add_shape(
+        type="rect", layer="below", xref="x", yref="y",
+        x0=0, x1=cota, y0=i - meia_barra, y1=i + meia_barra,
+        fillcolor=COR_COTA_FUNDO, opacity=OPACIDADE_COTA_FUNDO, line_width=0,
+    )
+# Marca vertical no fim da cota: dá legenda e tooltip ao fundo
+fig_G3.add_trace(
+    go.Scatter(
+        x=parlamentares["cota"],
+        y=parlamentares["rotulo"],
+        mode="markers",
+        marker=dict(symbol="line-ns", size=22, line=dict(width=2.5, color=COR_COTA_MARCA)),
+        name=LEGENDA_COTA_G3,
+        customdata=list(zip(
+            parlamentares["cota"].map(formatar_reais, na_action="ignore"),
+            parlamentares["pct_cota"].map(formatar_percentual, na_action="ignore"),
+            parlamentares["meses"],
+        )),
+        hovertemplate=f"<b>%{{y}}</b><br>{ROTULO_COTA_PERIODO}: %{{customdata[0]}}"
+        f"<br>{ROTULO_PCT_COTA}: %{{customdata[1]}}<br>{ROTULO_MESES_ATIVOS}: %{{customdata[2]}}<extra></extra>",
+    )
+)
 fig_G3.add_trace(
     go.Scatter(
         x=parlamentares["total"],
         y=parlamentares["rotulo"],
         mode="text",
-        text=parlamentares["total"].map(rotulo_vs_media),
+        text=parlamentares["total"].map(rotulo_vs_medias),
         textposition="middle right",
         showlegend=False,
         hoverinfo="skip",
@@ -567,13 +728,17 @@ fig_G3.update_layout(
     height=max(320, 28 * len(parlamentares) + 140),
     legend=dict(orientation="h", yanchor="bottom", y=1.02, x=0, title_text=""),
     margin=dict(l=10, r=10, t=40, b=10),
-    xaxis=dict(tickformat=",.0f", range=[0, max(parlamentares["total"].max(), media_todos) * 1.4]),
+    xaxis=dict(
+        tickformat=",.0f",
+        # Folga à direita para o rótulo com as duas comparações
+        range=[0, max(max(parlamentares["total"].max(), media_todos) * 1.6, parlamentares["cota"].max() * 1.05)],
+    ),
     separators=",.",
 )
 # Médias de todos os parlamentares (não só dos exibidos no ranking)
-adicionar_linhas_media(fig_G3, media_geral, media_todos, exibir_media_filtro, exibir_media_todos)
+adicionar_linhas_media(fig_G3, media_geral, media_todos, exibir_media_filtro, exibir_media_todos, sem_filtro)
 st.plotly_chart(fig_G3, width="stretch")
-aviso_medias_iguais(media_geral, media_todos, exibir_media_filtro, exibir_media_todos)
+st.caption(NOTA_G3_COTA)
 
 primeiro = parlamentares.iloc[0]
 cat_primeiro = gasto_parl_cat[gasto_parl_cat["nuDeputadoId"] == parlamentares.index[0]].nlargest(1, "vlrLiquido").iloc[0]
@@ -610,6 +775,10 @@ matriz["total_fmt"] = matriz["total"].map(formatar_reais)
 matriz["media_fmt"] = matriz["media"].map(formatar_reais)
 matriz["media_mensal_fmt"] = matriz["media_mensal_partido"].map(formatar_reais)
 matriz["variacao_fmt"] = matriz["variacao"].map(formatar_variacao)
+cota_partido_mes = ativos.groupby(["sgPartido", "numMes"])["cota"].sum().rename("cota").reset_index()
+matriz = matriz.merge(cota_partido_mes, on=["sgPartido", "numMes"], how="left")
+matriz["pct_cota"] = matriz["total"] / matriz["cota"] * 100
+matriz["pct_cota_fmt"] = matriz["pct_cota"].map(formatar_percentual, na_action="ignore")
 
 # Linhas ordenadas pelo gasto total do partido no recorte (maior no topo)
 ordem_partidos = total_partido.index.tolist()[::-1]
@@ -626,6 +795,20 @@ if metrica_matriz == METRICA_VARIACAO:
             direction="horizontal",
             gradientLength=320,
             labelExpr="(datum.value > 0 ? '+' : '') + format(datum.value, '.0f') + '%'",
+        ),
+    )
+elif metrica_matriz == METRICA_COTA:
+    # Divergente em torno de 100% da cota: azul abaixo do teto, vermelho acima
+    coluna_valor = "pct_cota"
+    cor = alt.Color(
+        "pct_cota:Q",
+        title=LEGENDA_COR_G4_COTA,
+        scale=alt.Scale(domain=[50, 100, 150], range=DIVERGENTE, clamp=True),
+        legend=alt.Legend(
+            orient="bottom",
+            direction="horizontal",
+            gradientLength=320,
+            labelExpr="format(datum.value, '.0f') + '%'",
         ),
     )
 else:
@@ -669,6 +852,7 @@ matriz_chart = (
             alt.Tooltip("variacao_fmt:N", title=ROTULO_VARIACAO),
             alt.Tooltip("parlamentares:Q", title=ROTULO_PARLAMENTARES),
             alt.Tooltip("media_fmt:N", title=ROTULO_MEDIA),
+            alt.Tooltip("pct_cota_fmt:N", title=ROTULO_PCT_COTA),
         ],
     )
     # Mesmo passo nos dois eixos para que as células sejam quadradas
@@ -684,6 +868,6 @@ elif metrica_matriz == METRICA_VARIACAO:
     pico = matriz.loc[matriz["variacao"].idxmax()]
     variacao_por_mes = matriz.groupby("numMes")["variacao"].mean()
 else:
-    st.caption(NOTA_G4)
-    pico = matriz.loc[matriz[coluna_valor].idxmax()]
+    st.caption(NOTA_G4_COTA if metrica_matriz == METRICA_COTA else NOTA_G4)
+    pico =matriz.loc[matriz[coluna_valor].idxmax()]
     por_mes = matriz.groupby("numMes")["total"].sum()
